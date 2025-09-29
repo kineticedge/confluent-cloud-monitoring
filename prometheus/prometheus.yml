@@ -1,0 +1,20 @@
+global:
+  scrape_interval: 1m
+
+scrape_configs:
+  - job_name: Confluent Cloud
+    scrape_interval: 1m
+    scheme: https
+    static_configs:
+      - targets:
+          - api.telemetry.confluent.cloud:443
+    metrics_path: "/v2/metrics/cloud/export"
+    params:
+      resource.kafka.id: ["XXX"]
+      resource.schema_registry.id: ["YYY"]
+      resource.connector.id: ["ZZZ"]
+      #resource.ksql.id: []
+    basic_auth:
+      username: "{{USERNAME}}"
+      password: "{{PASSWORD}}"
+
